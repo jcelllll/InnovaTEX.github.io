@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./EMTstyle.css">
+    <title>Samal Contacts</title> 
+</head>
+
+<body>
+    <header class="header">
+        <nav class="logo">
+            <a href="about.html">InovateX Hub</a>
+        </nav>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="guides.html">Guides</a>
+            <a href="maps.html">Maps</a>
+            <a href="contacts.html" class="active">Contacts</a>
+        </nav>
+    </header>
+
+    <main>
+        <div style="padding: 2em;">
+            <h7>Emergency Hotlines</h7>
+        </div>
+        <hr style="margin-left: 20px; width: 420px; margin-top: -10px; margin-bottom: 20px;">
+        <div class="mainFilter">
+        <div class="containerC">
+            <p style="font-size: 14px; padding: 0px 20px 20px 0px; margin-left: 0px;">
+                <big>Input the barangay to know the contact information of their respective <b>BDRRMC</b> for more specific and immediate response.</big> <br><br>
+                <small><b>BDRRMC</b> means <b>Barangay Disaster Risk Reduction and Management Committee</b></small>
+            <div actions="" class="search-bar">
+                <input type="text" id="searchBar" oninput="searchBarangay()" placeholder="Search barangay here...">
+                
+            </div>
+            <ul id="ContactList"></ul>
+        </div>
+        <script>
+            var contacts = [
+                { District: "Kaputian District", Barangay: "Adecor", Contact: "BDRRMC : 09876765124"},
+                { District: "Kaputian District", Barangay: "Anonang", Contact: "BDRRMC : 09767654235"},
+                { District: "Kaputian District", Barangay: "Bandera", Contact: "BDRRMC : 09876753456"},
+                { District: "Kaputian District", Barangay: "Cogon", Contact: "BDRRMC : 09675643123"},
+                { District: "Kaputian District", Barangay: "Dadatan", Contact: "BDRRMC : 09765645432"},
+                { District: "Kaputian District", Barangay: "Kanaan", Contact: "BDRRMC : 09654532456"},
+                { District: "Kaputian District", Barangay: "Libertad", Contact: "BDRRMC : 09654589567"},
+                { District: "Kaputian District", Barangay: "Linosutan", Contact: "BDRRMC : 09786534526"},
+                { District: "Kaputian District", Barangay: "Pangubatan", Contact: "BDRRMC : 09675432145"},
+                { District: "Kaputian District", Barangay: "Poblacion", Contact: "BDRRMC : 09543245612"},
+                { District: "Kaputian District", Barangay: "San Isidro", Contact: "BDRRMC : 09765645234"},
+                { District: "Kaputian District", Barangay: "San Remegio", Contact: "BDRRMC : 09786545622"},
+                { District: "Kaputian District", Barangay: "Santa Cruz", Contact: "BDRRMC : 0976341719876"},
+                { District: "Kaputian District", Barangay: "Sion", Contact: "BDRRMC : 09756712345"},
+                { District: "Kaputian District", Barangay: "Tagbaobo", Contact: "BDRRMC : 09765743245"},
+                { District: "Samal District", Barangay: "Aumbay", Contact: "BDRRMC : 09456765124"},
+                { District: "Samal District", Barangay: "Aundanao", Contact: "BDRRMC : 09567567435"},
+                { District: "Samal District", Barangay: "Catagman", Contact: "BDRRMC : 09567623456"},
+                { District: "Samal District", Barangay: "Cawag", Contact: "BDRRMC : 09786545234"},
+                { District: "Samal District", Barangay: "Del Monte", Contact: "BDRRMC : 09786545234"},
+                { District: "Samal District", Barangay: "Guilon", Contact: "BDRRMC : 09564324561"},
+                { District: "Samal District", Barangay: "Licup", Contact: "BDRRMC : 09356576124"},
+                { District: "Samal District", Barangay: "Limao", Contact: "BDRRMC : 09365454236"},
+                { District: "Samal District", Barangay: "Mambago-A", Contact: "BDRRMC : 09561234561"},
+                { District: "Samal District", Barangay: "Penaplata", Contact: "BDRRMC : 09467812356"},
+                { District: "Samal District", Barangay: "San Jose", Contact: "BDRRMC : 09562345123"},
+                { District: "Samal District", Barangay: "San Miguel", Contact: "BDRRMC : 09756516721"},
+                { District: "Samal District", Barangay: "Tagbay", Contact: "BDRRMC : 09456712344"},
+                { District: "Samal District", Barangay: "Tagbitan-ag", Contact: "BDRRMC : 09356789123"},
+                { District: "Samal District", Barangay: "Tagdaliao", Contact: "BDRRMC : 09120567123"},
+                { District: "Babak District", Barangay: "Balet", Contact: "BDRRMC : 09524584523"},
+                { District: "Babak District", Barangay: "Caliclic", Contact: "BDRRMC : 09125689751"},
+                { District: "Babak District", Barangay: "Camudmud", Contact: "BDRRMC : 09568975412"},
+                { District: "Babak District", Barangay: "Cogon", Contact: "BDRRMC : 09589867521"},
+                { District: "Babak District", Barangay: "Kinawitnon", Contact: "BDRRMC : 09457568954"},
+                { District: "Babak District", Barangay: "Libuak", Contact: "BDRRMC : 09458597584"},
+                { District: "Babak District", Barangay: "Mambago-B", Contact: "BDRRMC : 09785945869"},
+                { District: "Babak District", Barangay: "Miranda", Contact: "BDRRMC : 09567845587"},
+                { District: "Babak District", Barangay: "San Agustin", Contact: "BDRRMC : 09784589564"},
+                { District: "Babak District", Barangay: "San Antonio", Contact: "BDRRMC : 09565458987"},
+                { District: "Babak District", Barangay: "San Isidro", Contact: "BDRRMC : 098758698"},
+                { District: "Babak District", Barangay: "Santo Nino", Contact: "BDRRMC : 09789865456"},
+                { District: "Babak District", Barangay: "Tagpopongan", Contact: "BDRRMC : 09521425369"},
+                { District: "Babak District", Barangay: "Tambo", Contact: "BDRRMC : 09875854520"},
+                { District: "Babak District", Barangay: "Toril", Contact: "BDRRMC : 09568754198"},
+                { District: "Babak District", Barangay: "Villarica", Contact: "BDRRMC : 09187986545"},
+            ];
+    
+            function searchBarangay() {
+                var searchTerm = document.getElementById('searchBar').value.toLowerCase();
+                var filteredBarangay = filterBarangay(contacts, searchTerm);
+
+                displayContacts(filteredBarangay);
+            }
+    
+            function filterBarangay(contactsArray, term) {
+                return contactsArray.filter(function(contact) {
+                    return contact.Barangay.toLowerCase().includes(term);
+                });
+            }
+    
+            function displayContacts(contactsArray) {
+                var contactsListElement = document.getElementById('ContactList');
+                contactsListElement.innerHTML = ""; // Clear previous results
+    
+                if (contactsArray.length === 0) {
+                    contactsListElement.innerHTML = "<li>No matching Barangay found</li>";
+                } else {
+                    contactsArray.forEach(function(contact) {
+                        var listItem = document.createElement('li');
+                        listItem.innerHTML = `${contact.District}<br>Barangay ${contact.Barangay}<br>${contact.Contact}`;
+                        contactsListElement.appendChild(listItem);
+                    });
+                }
+            }
+        </script>
+       <div class="divMain">
+        <div>
+            <h5>CDRRMD Samal</h5>
+            <ul class="sList">
+                City of Samal Contacts:
+                <li>09394549902</li>
+                <li>09773440063</li>
+            </ul>
+            <p class="sPar">
+                <b>CDRRMD. City Disaster Risk Reduction and Management Department.</b> Contact this agency in case of natural disasters (e.g. earthquakes) and human-induced hazards (e.g. trasportation accidents).
+            </p>
+        <div>
+            <hr><br>
+            <h5>CHOC</h5>
+            <ul class="sList">
+                <li>RHU Samal: 09755926928</li>
+                <li>RHU Babak: 09273182432</li>
+                <li>RHU Kaputian: 09602934216</li>
+            </ul>
+            <p class="sPar">
+                <b>CHOC. City Health Operation Center. </b> Contact this agency in case of public health crisis or emergency.
+            </p>
+        </div>
+        </div>
+       </div>
+       <div class="divMain">
+        <div>
+            <h5>PCG Samal</h5>
+            <ul class="sList">
+                <li>Babak District: 09663055395</li>
+                <li>Kaputian District: 09272463240</li>
+                <li>Talicud: 09169448001</li>
+            </ul>
+            <p class="sPar">
+                <b>PCG. Philippine Coast Guard.</b> Contact this agency in case of coastal emergency (including tsunami), safety, and security and other maritime interests.
+            </p>
+        <div>
+            <hr><br>
+            <h5>BFP Samal</h5>
+            <ul class="sList">
+                <li>Samal District: 09954882176</li>
+                <li>Babak District: 09816955910</li>
+                <li>Kaputian District: 09816075115</li>
+            </ul>
+            <p class="sPar">
+                <b>BFP. Bureau of Fire Protection.</b> Contact this agency in case of fire emergency.
+            </p>
+        </div>
+        </div>
+       </div>
+    </div>
+    </main>
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p class="pfoot"> <small>&copy; 2023 InovateX Hub. All Rights Reserved.</small></p>
+        </div>
+    </footer> 
+</body>
+</html>
